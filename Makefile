@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2021/12/12 04:08:17 by plouvel          ###   ########.fr        #
+#    Updated: 2021/12/21 12:28:44 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 # test
@@ -25,6 +25,7 @@ SRCS	=	ft_memset.c 		\
 			ft_strlen.c			\
 			ft_strlcpy.c		\
 			ft_strlcat.c		\
+			ft_strncat.c		\
 			ft_strncmp.c		\
 			ft_strchr.c			\
 			ft_strrchr.c		\
