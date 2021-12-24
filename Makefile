@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2021/12/24 01:15:34 by plouvel          ###   ########.fr        #
+#    Updated: 2021/12/24 01:27:57 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,9 @@ SRCS		=	ft_memset.c 		\
 				ft_printf/printf_conversion.c	\
 				ft_printf/printf_parsing.c		\
 				ft_printf/printf_puts.c			\
-				ft_printf/printf_utils.c
+				ft_printf/printf_utils.c		\
+				gnl/get_next_line.c			\
+				gnl/get_next_line_utils.c	\
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
@@ -92,22 +94,22 @@ NAME		=	libft.a
 
 RM			=	rm -rf
 
-$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
-				@mkdir -p $(OBJS_DIR)
-				@mkdir -p $(OBJS_DIR)ft_printf
-				${CC} ${CFLAGS} -c $< -o $@
-
 $(NAME): 		$(OBJS)
 				ar r ${NAME} ${OBJS}
 				ranlib ${NAME}
 
+$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
+				@mkdir -p $(OBJS_DIR)
+				@mkdir -p $(OBJS_DIR)ft_printf
+				@mkdir -p $(OBJS_DIR)gnl
+				${CC} ${CFLAGS} -c $< -o $@
+
 all:			$(NAME)
 
 clean:
-				${RM} ${OBJS}
+				${RM} ${OBJS_DIR}
 
 fclean:			clean
-				${RM} ${OBJS_DIR}
 				${RM} ${NAME}
 
 re:				fclean all
