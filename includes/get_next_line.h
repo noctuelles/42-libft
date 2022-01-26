@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 18:06:24 by plouvel           #+#    #+#             */
-/*   Updated: 2021/12/24 01:26:48 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/01/26 17:22:22 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef struct s_gnl_info
 }				t_gnl_info;
 
 char	*strralloc(char *str, char *add, size_t add_len);
-size_t	ft_strlen(const char *str);
 int		get_cpy_len(const char *str, t_gnl_info *gnl_info);
 char	*get_next_line(int fd);
 
