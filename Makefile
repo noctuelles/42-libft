@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2021/12/24 01:27:57 by plouvel          ###   ########.fr        #
+#    Updated: 2022/01/26 12:51:41 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS		=	ft_memset.c 		\
 				ft_strjoinc.c		\
 				ft_strtrim.c		\
 				ft_atoi.c			\
+				ft_atoi_base.c		\
 				ft_itoa.c			\
 				ft_itoa_base.c		\
 				ft_itoa_ubase.c		\
@@ -99,9 +100,7 @@ $(NAME): 		$(OBJS)
 				ranlib ${NAME}
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
-				@mkdir -p $(OBJS_DIR)
-				@mkdir -p $(OBJS_DIR)ft_printf
-				@mkdir -p $(OBJS_DIR)gnl
+				@mkdir -p $(dir $@)
 				${CC} ${CFLAGS} -c $< -o $@
 
 all:			$(NAME)
