@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/01/26 13:21:37 by plouvel          ###   ########.fr        #
+#    Updated: 2022/01/27 17:21:43 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,10 +72,11 @@ SRCS		=	ft_memset.c 		\
 				ft_lstsize.c		\
 				ft_lstlast.c		\
 				ft_lstadd_back.c	\
-				ft_lstdelone.c		\
-				ft_lstclear.c		\
-				ft_lstiter.c		\
-				ft_lstmap.c			\
+				ft_lstadd_back_ret_last.c		\
+				ft_lstdelone.c					\
+				ft_lstclear.c					\
+				ft_lstiter.c					\
+				ft_lstmap.c						\
 				ft_printf/ft_printf.c			\
 				ft_printf/printf_ansi.c			\
 				ft_printf/printf_apply.c		\
@@ -84,8 +85,8 @@ SRCS		=	ft_memset.c 		\
 				ft_printf/printf_parsing.c		\
 				ft_printf/printf_puts.c			\
 				ft_printf/printf_utils.c		\
-				gnl/get_next_line.c			\
-				gnl/get_next_line_utils.c	\
+				gnl/get_next_line.c				\
+				gnl/get_next_line_utils.c		\
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
