@@ -6,11 +6,12 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 21:02:46 by plouvel           #+#    #+#             */
-/*   Updated: 2021/12/24 01:23:43 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/01/26 17:22:13 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "libft.h"
 #include <unistd.h>
 #include <stdlib.h>
 
