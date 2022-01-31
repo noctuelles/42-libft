@@ -5,41 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/29 18:06:24 by plouvel           #+#    #+#             */
-/*   Updated: 2022/01/26 17:22:22 by plouvel          ###   ########.fr       */
+/*   Created: 2022/01/30 20:07:41 by plouvel           #+#    #+#             */
+/*   Updated: 2022/01/31 02:37:34 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
+# include <sys/types.h>
 
-# include <stddef.h>
-
-/*		gnl_info structure.
- *
- *		line:			the dynamic string that'll be returnn.
- *		len:			the lenght to copy over line in the buffer.
- *		f_fullrd:		this flag is set to 1 if we read a '\n'.
- *		f_readd_err:	this flag is set if he read fails.
- *		f_malloc_err:	this flag is set if a malloc fails.
- */
-
-typedef struct s_gnl_info
+typedef enum e_flags
 {
-	char	*line;
-	int		rded;
-	size_t	len;
-	int		f_fullrd;
-	int		f_read_err;
-	int		f_malloc_err;
-}				t_gnl_info;
+	INIT = 1U,
+	LINE_DONE = 1U << 1,
+	CAN_READ = 1U << 2
+}				t_flags;
 
-char	*strralloc(char *str, char *add, size_t add_len);
-int		get_cpy_len(const char *str, t_gnl_info *gnl_info);
+typedef struct s_gnl
+{
+	char	*buffer;
+	char	*start_buffer_addr;
+	char	*line;
+	char	*new_line;
+	char	tmp_char;
+	int		fd;
+	ssize_t	readed;
+	int		flags;
+}				t_gnl;
+
+char	*init_gnl(t_gnl *gnl, int fd);
+char	*quit_gnl(t_gnl *gnl);
+char	*ft_strjoin(char *s1, char *s2);
+
 char	*get_next_line(int fd);
 
 #endif

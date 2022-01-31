@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/01/27 17:21:43 by plouvel          ###   ########.fr        #
+#    Updated: 2022/01/31 02:50:18 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,8 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
 CFLAGS		=	-Wall -Werror -Wextra -I includes
 
+GNL_BUFFER	=	10240
+
 CC			=	cc
 
 NAME		=	libft.a
@@ -101,6 +103,10 @@ RM			=	rm -rf
 $(NAME): 		$(OBJS)
 				ar r ${NAME} ${OBJS}
 				ranlib ${NAME}
+
+$(OBJS_DIR)gnl/%.o:	$(SRCS_DIR)gnl/%.c
+					@mkdir -p $(dir $@)
+					${CC} ${CFLAGS} -D BUFFER_SIZE=$(GNL_BUFFER) -c $< -o $@
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
 				@mkdir -p $(dir $@)
