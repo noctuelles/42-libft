@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/01/27 17:21:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/01 13:40:17 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@
 # include <stddef.h>
 # include <stdint.h>
 
-# define TRUE 1
+# define TRUE  1
 # define FALSE 0
+
+# define STDIN  0
+# define STDOUT 1
+# define STDERR 2
 
 typedef uint8_t	t_bool;
 
