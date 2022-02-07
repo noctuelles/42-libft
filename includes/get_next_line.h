@@ -1,25 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 20:07:41 by plouvel           #+#    #+#             */
-/*   Updated: 2022/01/31 02:37:34 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/07 14:50:22 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <sys/types.h>
+
+# if defined (__APPLE__)
+#  include <limits.h>
+# elif __linux__
+#  define OPEN_MAX 1024
+# endif
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 typedef enum e_flags
 {
 	INIT = 1U,
 	LINE_DONE = 1U << 1,
-	CAN_READ = 1U << 2
+	CAN_READ = 1U << 2,
+	MALLOC_EXCEPTION = 1U << 3
 }				t_flags;
 
 typedef struct s_gnl
@@ -34,9 +45,11 @@ typedef struct s_gnl
 	int		flags;
 }				t_gnl;
 
-char	*init_gnl(t_gnl *gnl, int fd);
-char	*quit_gnl(t_gnl *gnl);
-char	*ft_strjoin(char *s1, char *s2);
+/* get_next_line_utils_bonus.c */
+
+void	fill_line(t_gnl *gnl);
+
+/* get_next_line_bonus.c */
 
 char	*get_next_line(int fd);
 
