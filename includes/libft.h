@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/01 13:40:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/10 19:22:07 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # define STDOUT 1
 # define STDERR 2
 
-typedef uint8_t	t_bool;
+typedef uint8_t		t_bool;
+typedef uint64_t	t_index;
+typedef int64_t		t_sindex;
 
 typedef struct s_list
 {
