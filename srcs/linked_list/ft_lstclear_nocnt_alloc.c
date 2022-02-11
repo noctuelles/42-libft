@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_nocnt_alloc.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 13:31:04 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/11 17:36:49 by plouvel          ###   ########.fr       */
+/*   Created: 2022/02/11 17:35:32 by plouvel           #+#    #+#             */
+/*   Updated: 2022/02/11 17:36:44 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-static void	recursion(t_list *lst, void (*del)(void *))
+static void	recursion(t_list *lst)
 {
 	if (lst)
-		recursion(lst->next, (*del));
-	ft_lstdelone(lst, (*del));
+		recursion(lst->next);
+	free(lst);
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear_nocnt_alloc(t_list **lst)
 {
 	if (!lst)
 		return ;
 	if (!*lst)
 		return ;
-	recursion(*lst, (*del));
+	recursion(*lst);
 	*lst = NULL;
 }
