@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/25 11:16:24 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/11 19:01:26 by plouvel          ###   ########.fr       */
+/*   Created: 2022/02/11 19:01:03 by plouvel           #+#    #+#             */
+/*   Updated: 2022/02/11 19:02:28 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (!n)
-		return (0);
-	while (*s1 != '\0' && *s1 == *s2 && --n)
+	while (*s1 != '\0' && *s1 == *s2)
 	{
 		s1++;
 		s2++;
