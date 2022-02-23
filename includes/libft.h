@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/23 09:37:00 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/23 12:21:02 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 char	*ft_strdup(const char *s);
 char	*ft_strndup(const char *s, size_t n);
+char	*ft_strdelchr(char *str, const char *charset);
 
 char	*ft_straddc(char **s, char stop, char c, size_t n);
 char	*ft_straddbc(char **s, char c, size_t n);

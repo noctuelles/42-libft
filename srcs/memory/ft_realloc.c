@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 09:18:55 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/23 09:37:01 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/23 10:08:14 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_realloc(void *ptr, size_t oldsize, size_t newsize)
 {
 	void	*newptr;
 
-	if (newsize == 0 || oldsize == 0)
+	if (newsize == 0)
 	{
 		free(ptr);
 		return (NULL);
@@ -27,7 +27,7 @@ void	*ft_realloc(void *ptr, size_t oldsize, size_t newsize)
 		newptr = malloc(newsize);
 		if (!newptr)
 			return (NULL);
-		if (ptr)
+		if (ptr && oldsize)
 			ft_memcpy(newptr, ptr, oldsize);
 	}
 	return (newptr);
