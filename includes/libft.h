@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/11 19:02:08 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/23 09:37:00 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
+void	*ft_realloc(void *ptr, size_t oldsize, size_t newsize);
 void	ft_bzero(void *s, size_t n);
 
 /* Allocation related functions */
