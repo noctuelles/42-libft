@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dlstadd_back.c                                  :+:      :+:    :+:   */
+/*   ft_dlstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/25 00:46:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/25 12:22:49 by plouvel          ###   ########.fr       */
+/*   Created: 2022/02/25 11:27:50 by plouvel           #+#    #+#             */
+/*   Updated: 2022/02/25 11:35:49 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_dlstadd_back(t_dlist **dlst, t_dlist *new)
+void	ft_dlstclear(t_dlist **lst, void (*del)(void *))
 {
 	t_dlist	*elem;
+	t_dlist	*next;
 
-	if (!dlst)
+	if (!lst)
 		return ;
-	if (!*dlst)
-		*dlst = new;
-	else
+	if (!*lst)
+		return ;
+	elem = *lst;
+	while (elem)
 	{
-		elem = *dlst;
-		while (elem->next != NULL)
-			elem = elem->next;
-		elem->next = new;
-		new->prev = elem;
+		next = elem->next;
+		ft_dlstdelone(lst, elem, (*del));
+		elem = next;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/25 01:50:01 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/25 11:34:18 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_dlist	*ft_dlstnew(void *content);
 void	ft_dlstadd_back(t_dlist **dlst, t_dlist *new);
 void	ft_dlstdelone(t_dlist **lst, t_dlist *elem, void (*del)(void *));
+void	ft_dlstclear(t_dlist **lst, void (*del)(void *));
 
 #endif
