@@ -6,11 +6,11 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/28 14:17:09 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/28 14:50:29 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/28 14:53:08 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stddef.h>
 
 char	*ft_strdelchr(char *str)
 {
