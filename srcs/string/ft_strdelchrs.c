@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdelchr.c                                     :+:      :+:    :+:   */
+/*   ft_strdelchrs.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/23 11:46:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/23 12:20:51 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/28 15:01:16 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static inline void	shift_str(char *str, unsigned char c)
 	}
 }
 
-char	*ft_strdelchr(char *str, const char *charset)
+char	*ft_strdelchrs(char *str, const char *charset)
 {
 	size_t	i;
 	size_t	j;
