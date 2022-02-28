@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 00:46:30 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/25 12:22:49 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/02/28 17:48:47 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ void	ft_dlstadd_back(t_dlist **dlst, t_dlist *new)
 		new->prev = elem;
 	}
 }
-
