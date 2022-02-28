@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/02/25 11:55:32 by plouvel          ###   ########.fr        #
+#    Updated: 2022/02/28 14:42:35 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_strnstr.c			\
 				string/ft_strdup.c			\
 				string/ft_strndup.c			\
+				string/ft_strdelchrs.c		\
 				string/ft_strdelchr.c		\
 				string/ft_straddc.c			\
 				string/ft_straddbc.c		\
