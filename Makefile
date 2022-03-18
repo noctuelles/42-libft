@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/02/28 20:01:36 by plouvel          ###   ########.fr        #
+#    Updated: 2022/03/18 19:18:44 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,12 +89,15 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_lstiter.c					\
 				linked_list/ft_lstmap.c						\
 				ft_printf/ft_printf.c			\
+				ft_printf/ft_dprintf.c			\
 				ft_printf/printf_ansi.c			\
+				ft_printf/dprintf_ansi.c		\
 				ft_printf/printf_apply.c		\
 				ft_printf/printf_compute.c		\
 				ft_printf/printf_conversion.c	\
 				ft_printf/printf_parsing.c		\
 				ft_printf/printf_puts.c			\
+				ft_printf/dprintf_puts.c		\
 				ft_printf/printf_utils.c		\
 				gnl/get_next_line_bonus.c		\
 				gnl/get_next_line_utils_bonus.c	\
