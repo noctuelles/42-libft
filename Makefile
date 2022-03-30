@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/03/18 19:18:44 by plouvel          ###   ########.fr        #
+#    Updated: 2022/03/30 11:11:56 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_strncat.c			\
 				string/ft_strncmp.c			\
 				string/ft_strcmp.c			\
+				string/ft_strcmp_ignore_case.c	\
 				string/ft_strchr.c			\
 				string/ft_strrchr.c			\
 				string/ft_strnstr.c			\
@@ -72,6 +73,8 @@ SRCS		=	memory/ft_memset.c 			\
 				types/ft_isprint.c		\
 				types/ft_toupper.c		\
 				types/ft_tolower.c		\
+				types/ft_islower.c		\
+				types/ft_isupper.c		\
 				linked_list/ft_lstnew.c			\
 				linked_list/ft_dlstnew.c		\
 				linked_list/ft_lstadd_front.c	\
