@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 12:32:08 by plouvel           #+#    #+#             */
-/*   Updated: 2022/03/18 19:12:03 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/04/18 02:08:43 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ enum e_printf_flags
 	R_JUST=0x02,
 	SIGN=0x04,
 	AF=0x08,
-	SPACE=0x10,
+	_SPACE=0x10,
 	ZERO_PAD=0x20,
 	PRCS=0x40,
 	NEG=0x80,

@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 12:03:42 by plouvel           #+#    #+#             */
-/*   Updated: 2021/12/12 18:42:15 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/04/18 04:08:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	printf_apply_precision(t_printf_info *info)
 			ft_straddc(&info->bufs.main, '-', '0', info->prcs_add);
 		else if (info->flags & SIGN)
 			ft_straddc(&info->bufs.main, '+', '0', info->prcs_add);
-		else if (info->flags & SPACE)
+		else if (info->flags & _SPACE)
 			ft_straddc(&info->bufs.main, ' ', '0', info->prcs_add);
 		else
 			ft_straddbc(&info->bufs.main, '0', info->prcs_add);
@@ -60,7 +60,7 @@ static void	printf_apply_padding(t_printf_info *info)
 				ft_straddc(&info->bufs.main, '-', '0', info->pad_add);
 			else if (info->flags & SIGN)
 				ft_straddc(&info->bufs.main, '+', '0', info->pad_add);
-			else if (info->flags & SPACE)
+			else if (info->flags & _SPACE)
 				ft_straddc(&info->bufs.main, ' ', '0', info->pad_add);
 			else
 				info->bufs.left = ft_strnew_nchar('0', info->pad_add);
@@ -85,7 +85,7 @@ static void	printf_apply_primary_flags(t_printf_info *info)
 	{
 		if ((info->flags & SIGN) && !(info->flags & NEG))
 			ft_straddbc(&info->bufs.main, '+', 1);
-		else if ((info->flags & SPACE) && !(info->flags & NEG))
+		else if ((info->flags & _SPACE) && !(info->flags & NEG))
 			ft_straddbc(&info->bufs.main, ' ', 1);
 	}
 	else if ((info->conv == 'x') && (info->flags & AF)
@@ -119,7 +119,7 @@ void	printf_flags_compute_n_apply(t_printf_info *info)
 		}
 		if (info->flags & PRCS)
 			printf_compute_precision_add(info);
-		if (info->flags & SIGN || info->flags & SPACE || info->flags & AF)
+		if (info->flags & SIGN || info->flags & _SPACE || info->flags & AF)
 			printf_apply_primary_flags(info);
 		if (info->flags & PRCS)
 			printf_apply_precision(info);

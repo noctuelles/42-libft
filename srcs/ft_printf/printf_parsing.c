@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 12:36:35 by plouvel           #+#    #+#             */
-/*   Updated: 2021/12/12 13:33:31 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/04/18 04:09:10 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	printf_set_flags(char flag, t_printf_info *info)
 	else if (flag == '#')
 		info->flags |= AF;
 	else if (flag == ' ')
-		info->flags |= SPACE;
+		info->flags |= _SPACE;
 	else if (flag == '+')
 		info->flags |= SIGN;
 }
