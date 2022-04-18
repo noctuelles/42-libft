@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/04/05 02:31:03 by plouvel          ###   ########.fr        #
+#    Updated: 2022/04/18 03:01:22 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,12 +84,10 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_dlstlast.c		\
 				linked_list/ft_lstadd_back.c	\
 				linked_list/ft_dlstadd_back.c	\
-				linked_list/ft_lstadd_back_ret_last.c		\
 				linked_list/ft_lstdelone.c					\
 				linked_list/ft_dlstdelone.c					\
 				linked_list/ft_lstclear.c					\
 				linked_list/ft_dlstclear.c					\
-				linked_list/ft_lstclear_nocnt_alloc.c		\
 				linked_list/ft_lstiter.c					\
 				linked_list/ft_dlstiter.c					\
 				linked_list/ft_lstmap.c						\
