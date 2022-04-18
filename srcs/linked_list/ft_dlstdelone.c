@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 01:28:17 by plouvel           #+#    #+#             */
-/*   Updated: 2022/02/25 12:30:19 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/04/17 22:12:56 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	ft_dlstdelone(t_dlist **lst, t_dlist *elem, void (*del)(void *))
 		elem->prev->next = elem->next;
 		elem->next->prev = elem->prev;
 	}
-	del(elem->content);
+	if (del)
+		del(elem->content);
 	free(elem);
 }
