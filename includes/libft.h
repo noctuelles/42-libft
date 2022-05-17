@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/04/18 03:01:11 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/05/16 17:24:20 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stddef.h>
 # include <stdint.h>
+# include <stdbool.h>
 
 # define TRUE  1
 # define FALSE 0
@@ -119,6 +120,7 @@ void	ft_putbin_fd(int64_t n, size_t nbits, int fd);
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
+bool	ft_stronly_digits(const char *str);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
