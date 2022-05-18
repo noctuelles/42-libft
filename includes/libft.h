@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2022/05/16 17:24:20 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/05/18 15:04:20 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*ft_itoa_base(int64_t n, const char *base);
 char	*ft_itoa_ubase(uint64_t n, const char *base);
 
 int		ft_atoi(const char *nptr);
+double	ft_atof(const char *nptr);
 
 /* Official additional functions (on libft's pdf) */
 
