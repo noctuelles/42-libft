@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 15:04:09 by plouvel           #+#    #+#             */
-/*   Updated: 2022/05/18 15:04:20 by plouvel          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:17:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,27 @@ static int	ft_isspace(int c)
 	return (0);
 }
 
+static inline void	treat_decimal_part(const char *nptr, double *result)
+{
+	ssize_t	nbr_decimal;
+
+	if (*nptr == '.')
+	{
+		nbr_decimal = 0;
+		nptr++;
+		while (ft_isdigit(*nptr))
+		{
+			*result = *result * 10 + (*nptr++ - '0');
+			nbr_decimal--;
+		}
+		while (nbr_decimal++ < 0)
+			*result /= 10;
+	}
+}
+
 double	ft_atof(const char *nptr)
 {
 	double	result;
-	ssize_t	nbr_decimal;
 	int		sign;
 
 	result = 0;
@@ -38,14 +55,6 @@ double	ft_atof(const char *nptr)
 	}
 	while (ft_isdigit(*nptr))
 		result = result * 10 + (*nptr++ - '0');
-	nptr++;
-	nbr_decimal = 0;
-	while (ft_isdigit(*nptr))
-	{
-		result = result * 10 + (*nptr++ - '0');
-		nbr_decimal--;
-	}
-	while (nbr_decimal++ < 0)
-		result /= 10;
+	treat_decimal_part(nptr, &result);
 	return (result * sign);
 }
