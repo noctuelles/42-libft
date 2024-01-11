@@ -92,26 +92,11 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_dlstclear.c					\
 				linked_list/ft_lstiter.c					\
 				linked_list/ft_dlstiter.c					\
-				linked_list/ft_lstmap.c						\
-				ft_printf/ft_printf.c			\
-				ft_printf/ft_dprintf.c			\
-				ft_printf/printf_ansi.c			\
-				ft_printf/dprintf_ansi.c		\
-				ft_printf/printf_apply.c		\
-				ft_printf/printf_compute.c		\
-				ft_printf/printf_conversion.c	\
-				ft_printf/printf_parsing.c		\
-				ft_printf/printf_puts.c			\
-				ft_printf/dprintf_puts.c		\
-				ft_printf/printf_utils.c		\
-				gnl/get_next_line_bonus.c		\
-				gnl/get_next_line_utils_bonus.c	\
+				linked_list/ft_lstmap.c
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
 CFLAGS		=	-Wall -Werror -Wextra -I includes -g3
-
-GNL_BUFFER	=	10240
 
 CC			=	cc
 
@@ -122,10 +107,6 @@ RM			=	rm -rf
 $(NAME): 		$(OBJS)
 				ar r ${NAME} ${OBJS}
 				ranlib ${NAME}
-
-$(OBJS_DIR)gnl/%.o:	$(SRCS_DIR)gnl/%.c
-					@mkdir -p $(dir $@)
-					${CC} ${CFLAGS} -D BUFFER_SIZE=$(GNL_BUFFER) -c $< -o $@
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c
 				@mkdir -p $(dir $@)
