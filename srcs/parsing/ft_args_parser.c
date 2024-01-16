@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/16 09:58:17 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/01/16 10:05:05 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ option_key_len(const char *key) {
  * @return parser option_key entry associated with key, or NULL if no entry are
  * found.
  */
-static t_arg_parser_option_entry *
-get_parser_option_entry(t_arg_parser_option_entry *parser_option_entries, size_t nbr_parser_option_entry,
+static t_args_parser_option_entry *
+get_parser_option_entry(t_args_parser_option_entry *parser_option_entries, size_t nbr_parser_option_entry,
                         struct s_parser_option_result *parser_option_result) {
-    t_arg_parser_option_entry *parser_entry = NULL;
+    t_args_parser_option_entry *parser_entry = NULL;
     size_t key_len = 0;
 
     for (size_t i = 0; i < nbr_parser_option_entry; i++) {
@@ -131,11 +131,11 @@ get_option_and_argument(char **argv, size_t *i, struct s_parser_option_result *p
 }
 
 static int
-parse_option(t_arg_parser_config *parser_config, size_t *i) {
+parse_option(t_args_parser_config *parser_config, size_t *i) {
     struct s_parser_option_result parser_option_result;
     const char *program_name;
-    t_parser_state parser_state;
-    t_arg_parser_option_entry *parser_option_entry;
+    t_args_parser_state parser_state;
+    t_args_parser_option_entry *parser_option_entry;
 
     program_name = parser_config->argv[0];
     if (get_option_and_argument(parser_config->argv, i, &parser_option_result) == OPTION_KEY_NOT_FOUND) {
@@ -166,7 +166,7 @@ parse_option(t_arg_parser_config *parser_config, size_t *i) {
 }
 
 int
-ft_args_parser(t_arg_parser_config *parser_config) {
+ft_args_parser(t_args_parser_config *parser_config) {
     for (size_t i = 1; i < parser_config->argc; i++) {
         if (parse_option(parser_config, &i) == -1) {
             return (-1);
