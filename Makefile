@@ -6,11 +6,9 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2022/05/18 15:04:32 by plouvel          ###   ########.fr        #
+#    Updated: 2024/01/16 09:59:38 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-# This is a test line
 
 OBJS_DIR	=	objs/
 
@@ -92,11 +90,12 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_dlstclear.c					\
 				linked_list/ft_lstiter.c					\
 				linked_list/ft_dlstiter.c					\
-				linked_list/ft_lstmap.c
+				linked_list/ft_lstmap.c						\
+				parsing/ft_args_parser.c					\
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
-CFLAGS		=	-Wall -Werror -Wextra -I includes -g3
+CFLAGS		=	-Wall -Werror -Wextra -I includes
 
 CC			=	cc
 
