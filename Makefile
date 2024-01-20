@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2024/01/16 09:59:38 by plouvel          ###   ########.fr        #
+#    Updated: 2024/01/20 14:28:24 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,8 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_itoa.c			\
 				string/ft_itoa_base.c		\
 				string/ft_itoa_ubase.c		\
+				string/ft_strmatch_int.c    \
+				string/ft_strmatch_hex.c    \
 				io/ft_putchar_fd.c			\
 				io/ft_putchar.c			\
 				io/ft_putstr_fd.c		\
@@ -92,10 +94,11 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_dlstiter.c					\
 				linked_list/ft_lstmap.c						\
 				parsing/ft_args_parser.c					\
+				parsing/ft_args_parser_generate_docs.c		\
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
-CFLAGS		=	-Wall -Werror -Wextra -I includes
+CFLAGS		=	-Wall -Werror -Wextra -I includes -g3
 
 CC			=	cc
 
