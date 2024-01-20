@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:50:28 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/16 10:05:30 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/01/20 13:58:01 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@
 #include <stdbool.h>
 #include <stddef.h>
 
+#define MAX_PARSER_ENTRIES 100
+#define DEFAULT_SPACING_DESCRIPTION 10
+
 typedef struct s_args_parser_state {
     char *error_message;
 } t_args_parser_state;
 
-typedef int (*t_args_parser_parse_fn)(const char *, t_args_parser_state *, void *);
+typedef int (*t_args_parser_parse_fn)(char *, t_args_parser_state *, void *);
 
 /**
  * The t_args_parser_option_entry_t structure is used to describe an option.
@@ -28,15 +31,15 @@ typedef int (*t_args_parser_parse_fn)(const char *, t_args_parser_state *, void 
  * A short_key is an option_key whose key if just string containing a single letter, ex. : 'c'. used like this : '-c'.
  * A long_key is an option_key whose key is a full string : ex. : 'count'. used like this : '--count'.
  * The argument indicate if the option takes an argument or not. In our example, the option 'count' takes an argument,
- * The argument_parse_fn is invoke when the option has an argument, and is responsible for parsing of the latter.
+ * The parse_fn is invoke when the option has an argument, and is responsible for parsing of the latter.
  */
 typedef struct s_args_parser_option_entry {
-    const char *short_key;
-    const char *long_key;
-    const char *description;
-    const char *argument_description;
-    bool argument;
-    t_args_parser_parse_fn argument_parse_fn;
+    const char            *short_key;
+    const char            *long_key;
+    const char            *description;
+    const char            *long_key_argument_description;
+    bool                   argument;
+    t_args_parser_parse_fn parse_fn;
 } t_args_parser_option_entry;
 
 /**
@@ -46,14 +49,15 @@ typedef struct s_args_parser_option_entry {
  * The input void pointer is for an user defined structure
  */
 typedef struct s_args_parser_config {
-    char **argv;
-    size_t argc;
+    char                      **argv;
+    size_t                      argc;
     t_args_parser_option_entry *parser_entries;
-    size_t nbr_parser_entries;
-    t_args_parser_parse_fn parse_argument_fn;
-    void *input;
+    size_t                      nbr_parser_entries;
+    t_args_parser_parse_fn      parse_argument_fn;
+    void                       *input;
 } t_args_parser_config;
 
-int ft_args_parser(t_args_parser_config *parser_config);
+int  ft_args_parser(t_args_parser_config *parser_config);
+void ft_args_parser_generate_docs(const t_args_parser_config *config, char *buffer);
 
 #endif  // FT_PING_ARGS_PARSER_H

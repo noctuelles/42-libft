@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/16 10:05:05 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/01/20 13:59:37 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 #include "libft.h"
 
 enum e_parser_option_key_type {
-    OPTION_KEY_NOT_FOUND = -1,
+    OPTION_KEY_NOT_FOUND  = -1,
     OPTION_KEY_TYPE_SHORT = 1,
-    OPTION_KEY_TYPE_LONG = 2,
+    OPTION_KEY_TYPE_LONG  = 2,
 };
 
 struct s_parser_option_result {
-    const char *option_key;
-    const char *option_argument;
+    char                         *option_key;
+    char                         *option_argument;
     enum e_parser_option_key_type option_key_type;
 };
 
@@ -52,7 +52,7 @@ static t_args_parser_option_entry *
 get_parser_option_entry(t_args_parser_option_entry *parser_option_entries, size_t nbr_parser_option_entry,
                         struct s_parser_option_result *parser_option_result) {
     t_args_parser_option_entry *parser_entry = NULL;
-    size_t key_len = 0;
+    size_t                      key_len      = 0;
 
     for (size_t i = 0; i < nbr_parser_option_entry; i++) {
         parser_entry = &parser_option_entries[i];
@@ -74,10 +74,10 @@ get_parser_option_entry(t_args_parser_option_entry *parser_option_entries, size_
     return (NULL);
 }
 
-static const char *
-get_option_long_key_argument(const char *option_key) {
-    const char *option_long_key_end = NULL;
-    const char *option_argument = NULL;
+static char *
+get_option_long_key_argument(char *option_key) {
+    char *option_long_key_end = NULL;
+    char *option_argument     = NULL;
 
     option_long_key_end = option_key + option_key_len(option_key);
 
@@ -88,9 +88,9 @@ get_option_long_key_argument(const char *option_key) {
     return (option_argument);
 }
 
-static const char *
-get_option_short_key_argument(const char *option_key, char **argv, size_t *i) {
-    const char *option_argument = NULL;
+static char *
+get_option_short_key_argument(char *option_key, char **argv, size_t *i) {
+    char *option_argument = NULL;
 
     if (*option_key != '\0' && option_key[1] != '\0') {
         option_argument = &option_key[1];
@@ -104,8 +104,8 @@ get_option_short_key_argument(const char *option_key, char **argv, size_t *i) {
 
 static int
 get_option_and_argument(char **argv, size_t *i, struct s_parser_option_result *parser_option_result) {
-    const char *option_key = argv[*i];
-    const char *option_argument = NULL;
+    char *option_key      = argv[*i];
+    char *option_argument = NULL;
 
     if (*option_key == '-') {
         option_key++;
@@ -124,7 +124,7 @@ get_option_and_argument(char **argv, size_t *i, struct s_parser_option_result *p
         parser_option_result->option_key_type = OPTION_KEY_NOT_FOUND;
     }
 
-    parser_option_result->option_key = option_key;
+    parser_option_result->option_key      = option_key;
     parser_option_result->option_argument = option_argument;
 
     return (parser_option_result->option_key_type);
@@ -133,9 +133,9 @@ get_option_and_argument(char **argv, size_t *i, struct s_parser_option_result *p
 static int
 parse_option(t_args_parser_config *parser_config, size_t *i) {
     struct s_parser_option_result parser_option_result;
-    const char *program_name;
-    t_args_parser_state parser_state;
-    t_args_parser_option_entry *parser_option_entry;
+    const char                   *program_name;
+    t_args_parser_state           parser_state;
+    t_args_parser_option_entry   *parser_option_entry;
 
     program_name = parser_config->argv[0];
     if (get_option_and_argument(parser_config->argv, i, &parser_option_result) == OPTION_KEY_NOT_FOUND) {
@@ -152,16 +152,18 @@ parse_option(t_args_parser_config *parser_config, size_t *i) {
             fprintf(stderr, "%s: option requires an argument -- '%s'\n", program_name, parser_option_result.option_key);
             return (-1);
         }
-
-        if (parser_option_entry->argument_parse_fn(parser_option_result.option_argument, &parser_state,
-                                                   parser_config->input) == -1) {
-            fprintf(stderr, "%s: option -- '%s': %s\n", program_name,
-                    parser_option_result.option_key_type == OPTION_KEY_TYPE_LONG ? parser_option_entry->long_key
-                                                                                 : parser_option_entry->short_key,
-                    parser_state.error_message);
-            return (-1);
-        }
     }
+
+    if (parser_option_entry->parse_fn != NULL &&
+        parser_option_entry->parse_fn(parser_option_result.option_argument, &parser_state, parser_config->input) ==
+            -1) {
+        fprintf(stderr, "%s: option -- '%s': %s\n", program_name,
+                parser_option_result.option_key_type == OPTION_KEY_TYPE_LONG ? parser_option_entry->long_key
+                                                                             : parser_option_entry->short_key,
+                parser_state.error_message);
+        return (-1);
+    }
+
     return (0);
 }
 
