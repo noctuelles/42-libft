@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 14:27:27 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/20 14:27:44 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/01/27 15:12:53 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ ft_strmatch_int(const char *str) {
         if (!ft_isdigit(*str)) {
             return (false);
         }
+        str++;
     }
 
     return (true);

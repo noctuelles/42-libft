@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/20 14:28:54 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/01/30 08:30:50 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ void ft_putnbr_base_fd(int64_t n, const char *base, int fd);
 void ft_putbin_fd(int64_t n, size_t nbits, int fd);
 
 /* Un-official additional custom functions */
+
+void ft_error(int status, int errnum, const char *format, ...);
 
 /* ###### ASCII functions ###### */
 

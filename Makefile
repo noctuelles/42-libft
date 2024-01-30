@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2024/01/20 14:28:24 by plouvel          ###   ########.fr        #
+#    Updated: 2024/01/30 08:31:07 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,7 @@ SRCS		=	memory/ft_memset.c 			\
 				io/ft_putnbr_fd.c		\
 				io/ft_putnbr_base_fd.c	\
 				io/ft_putbin_fd.c		\
+				io/ft_error.c           \
 				types/ft_isalpha.c		\
 				types/ft_isdigit.c		\
 				types/ft_isalnum.c		\
