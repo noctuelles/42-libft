@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:50:28 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/20 13:58:01 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/02/12 10:44:22 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <stdbool.h>
 #include <stddef.h>
 
-#define MAX_PARSER_ENTRIES 100
 #define DEFAULT_SPACING_DESCRIPTION 10
 
 typedef struct s_args_parser_state {
@@ -52,12 +51,12 @@ typedef struct s_args_parser_config {
     char                      **argv;
     size_t                      argc;
     t_args_parser_option_entry *parser_entries;
-    size_t                      nbr_parser_entries;
+    size_t                      parser_entries_len;
     t_args_parser_parse_fn      parse_argument_fn;
     void                       *input;
 } t_args_parser_config;
 
 int  ft_args_parser(t_args_parser_config *parser_config);
-void ft_args_parser_generate_docs(const t_args_parser_config *config, char *buffer);
+void ft_args_parser_print_docs(const t_args_parser_config *config);
 
 #endif  // FT_PING_ARGS_PARSER_H

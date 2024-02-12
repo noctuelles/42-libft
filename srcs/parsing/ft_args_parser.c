@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/20 13:59:37 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/02/12 10:50:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,37 +133,33 @@ get_option_and_argument(char **argv, size_t *i, struct s_parser_option_result *p
 static int
 parse_option(t_args_parser_config *parser_config, size_t *i) {
     struct s_parser_option_result parser_option_result;
-    const char                   *program_name;
     t_args_parser_state           parser_state;
     t_args_parser_option_entry   *parser_option_entry;
 
-    program_name = parser_config->argv[0];
     if (get_option_and_argument(parser_config->argv, i, &parser_option_result) == OPTION_KEY_NOT_FOUND) {
         return (parser_config->parse_argument_fn(parser_config->argv[*i], &parser_state, parser_config->input));
     }
-    parser_option_entry = get_parser_option_entry(parser_config->parser_entries, parser_config->nbr_parser_entries,
+    parser_option_entry = get_parser_option_entry(parser_config->parser_entries, parser_config->parser_entries_len,
                                                   &parser_option_result);
     if (parser_option_entry == NULL) {
-        fprintf(stderr, "%s: invalid option -- '%s'\n", program_name, parser_option_result.option_key);
+        ft_error(0, 0, "invalid option -- '%s'", parser_option_result.option_key);
         return (-1);
     }
     if (parser_option_entry->argument != false) {
         if (parser_option_result.option_argument == NULL) {
-            fprintf(stderr, "%s: option requires an argument -- '%s'\n", program_name, parser_option_result.option_key);
+            ft_error(0, 0, "option requires an argument -- '%s'\n", parser_option_result.option_key);
             return (-1);
         }
     }
-
     if (parser_option_entry->parse_fn != NULL &&
         parser_option_entry->parse_fn(parser_option_result.option_argument, &parser_state, parser_config->input) ==
             -1) {
-        fprintf(stderr, "%s: option -- '%s': %s\n", program_name,
-                parser_option_result.option_key_type == OPTION_KEY_TYPE_LONG ? parser_option_entry->long_key
-                                                                             : parser_option_entry->short_key,
-                parser_state.error_message);
+        ft_error(0, 0, "%s: option -- '%s': %s\n",
+                 parser_option_result.option_key_type == OPTION_KEY_TYPE_LONG ? parser_option_entry->long_key
+                                                                              : parser_option_entry->short_key,
+                 parser_state.error_message);
         return (-1);
     }
-
     return (0);
 }
 

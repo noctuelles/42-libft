@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2024/01/30 08:31:07 by plouvel          ###   ########.fr        #
+#    Updated: 2024/02/12 10:47:44 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,7 +95,7 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_dlstiter.c					\
 				linked_list/ft_lstmap.c						\
 				parsing/ft_args_parser.c					\
-				parsing/ft_args_parser_generate_docs.c		\
+				parsing/ft_args_parser_docs.c		\
 
 OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
