@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/02/12 10:50:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/04/18 23:52:04 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,45 +89,55 @@ get_option_long_key_argument(char *option_key) {
 }
 
 static char *
-get_option_short_key_argument(char *option_key, char **argv, size_t *i) {
+get_option_short_key_argument(char *option_key) {
     char *option_argument = NULL;
 
+    /* Option argument is right next to the option key. */
     if (*option_key != '\0' && option_key[1] != '\0') {
         option_argument = &option_key[1];
-    } else {
-        (*i)++;
-        option_argument = argv[*i];
     }
 
     return (option_argument);
 }
 
 static int
-get_option_and_argument(char **argv, size_t *i, struct s_parser_option_result *parser_option_result) {
-    char *option_key      = argv[*i];
-    char *option_argument = NULL;
-
+get_option(char *option_key, struct s_parser_option_result *parser_option_result) {
     if (*option_key == '-') {
         option_key++;
         if (*option_key == '-') {
             option_key++;
 
             parser_option_result->option_key_type = OPTION_KEY_TYPE_LONG;
-
-            option_argument = get_option_long_key_argument(option_key);
         } else {
             parser_option_result->option_key_type = OPTION_KEY_TYPE_SHORT;
-
-            option_argument = get_option_short_key_argument(option_key, argv, i);
         }
     } else {
         parser_option_result->option_key_type = OPTION_KEY_NOT_FOUND;
     }
-
-    parser_option_result->option_key      = option_key;
-    parser_option_result->option_argument = option_argument;
-
+    parser_option_result->option_key = option_key;
     return (parser_option_result->option_key_type);
+}
+int
+get_argument(const t_args_parser_option_entry *parser_option_entry, struct s_parser_option_result *parser_option_result,
+             char **argv, size_t *i) {
+    if (parser_option_result->option_key_type == OPTION_KEY_TYPE_SHORT) {
+        parser_option_result->option_argument = get_option_short_key_argument(parser_option_result->option_key);
+
+        if (parser_option_entry->argument == true && parser_option_result->option_argument == NULL) {
+            if (argv[*i + 1] != NULL) {
+                parser_option_result->option_argument = argv[*i + 1];
+                (*i)++;
+            }
+        }
+    } else if (parser_option_result->option_key_type == OPTION_KEY_TYPE_LONG) {
+        parser_option_result->option_argument = get_option_long_key_argument(parser_option_result->option_key);
+    }
+
+    if (parser_option_entry->argument == true && parser_option_result->option_argument == NULL) {
+        return (-1);
+    }
+
+    return (0);
 }
 
 static int
@@ -136,7 +146,7 @@ parse_option(t_args_parser_config *parser_config, size_t *i) {
     t_args_parser_state           parser_state;
     t_args_parser_option_entry   *parser_option_entry;
 
-    if (get_option_and_argument(parser_config->argv, i, &parser_option_result) == OPTION_KEY_NOT_FOUND) {
+    if (get_option(parser_config->argv[*i], &parser_option_result) == OPTION_KEY_NOT_FOUND) {
         return (parser_config->parse_argument_fn(parser_config->argv[*i], &parser_state, parser_config->input));
     }
     parser_option_entry = get_parser_option_entry(parser_config->parser_entries, parser_config->parser_entries_len,
@@ -145,11 +155,9 @@ parse_option(t_args_parser_config *parser_config, size_t *i) {
         ft_error(0, 0, "invalid option -- '%s'", parser_option_result.option_key);
         return (-1);
     }
-    if (parser_option_entry->argument != false) {
-        if (parser_option_result.option_argument == NULL) {
-            ft_error(0, 0, "option requires an argument -- '%s'\n", parser_option_result.option_key);
-            return (-1);
-        }
+    if (get_argument(parser_option_entry, &parser_option_result, parser_config->argv, i) == -1) {
+        ft_error(0, 0, "option requires an argument -- '%s'\n", parser_option_result.option_key);
+        return (-1);
     }
     if (parser_option_entry->parse_fn != NULL &&
         parser_option_entry->parse_fn(parser_option_result.option_argument, &parser_state, parser_config->input) ==
