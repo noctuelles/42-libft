@@ -156,5 +156,6 @@ void     ft_dlstclear(t_dlist **lst, void (*del)(void *));
 size_t   ft_dlstsize(t_dlist *lst);
 void     ft_dlstiter(t_dlist *lst, void (*f)(void *));
 t_dlist *ft_dlstlast(t_dlist *lst);
+void     ft_dlstsort(t_dlist **lst, int (*cmp)(void *, void *));
 
 #endif

@@ -94,6 +94,7 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_lstiter.c					\
 				linked_list/ft_dlstiter.c					\
 				linked_list/ft_lstmap.c						\
+				linked_list/ft_dlstsort.c					\
 				parsing/ft_args_parser.c					\
 				parsing/ft_args_parser_docs.c		\
 
