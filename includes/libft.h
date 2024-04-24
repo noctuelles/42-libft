@@ -24,6 +24,8 @@
 #define STDOUT 1
 #define STDERR 2
 
+#define VEC_DEFAULT_CAPACITY 256
+
 typedef uint8_t  t_bool;
 typedef uint64_t t_index;
 typedef int64_t  t_sindex;
@@ -157,5 +159,13 @@ size_t   ft_dlstsize(t_dlist *lst);
 void     ft_dlstiter(t_dlist *lst, void (*f)(void *));
 t_dlist *ft_dlstlast(t_dlist *lst);
 void     ft_dlstsort(t_dlist **lst, int (*cmp)(void *, void *));
+
+typedef struct s_vector t_vector;
+
+t_vector   *vector_new(size_t capacity, size_t elem_size);
+t_vector   *vector_push_back(t_vector *vector, const void *elem);
+const void *vector_data(const t_vector *vector);
+size_t     vector_size(const t_vector *vector);
+void       vector_free(t_vector **vector);
 
 #endif
