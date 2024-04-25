@@ -167,5 +167,6 @@ t_vector   *vector_push_back(t_vector *vector, const void *elem);
 const void *vector_data(const t_vector *vector);
 size_t     vector_size(const t_vector *vector);
 void       vector_free(t_vector **vector);
+void       vector_sort(t_vector *vector, int (*cmp)(const void *, const void *));
 
 #endif

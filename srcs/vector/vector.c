@@ -57,8 +57,16 @@ const void *vector_data(const t_vector *vector) {
     return vector->begin;
 }
 
+void vector_sort(t_vector *vector, int (*cmp)(const void *, const void *)) {
+    assert(vector != NULL);
+    qsort(vector->begin, vector->size, vector->elem_size, cmp);
+}
+
 void vector_free(t_vector **vector) {
     assert(vector != NULL);
+    if (*vector == NULL) {
+        return;
+    }
     free((*vector)->begin);
     free(*vector);
     *vector = NULL;
