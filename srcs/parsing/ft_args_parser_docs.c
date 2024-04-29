@@ -68,13 +68,13 @@ ft_args_parser_print_docs(const t_args_parser_config *config) {
     char **desc             = NULL;
     size_t biggest_desc_len = 0;
 
-    if ((desc = malloc(sizeof(*desc) * config->parser_entries_len)) == NULL) {
+    if ((desc = malloc(sizeof(*desc) * config->entries_nbr)) == NULL) {
         return;
     }
-    ft_bzero(desc, config->parser_entries_len * sizeof(*desc));
-    for (size_t i = 0; i < config->parser_entries_len; i++) {
+    ft_bzero(desc, config->entries_nbr * sizeof(*desc));
+    for (size_t i = 0; i < config->entries_nbr; i++) {
         size_t                            size  = DEFAULT_BASE_SIZE;
-        const t_args_parser_option_entry *entry = &config->parser_entries[i];
+        const t_args_parser_option_entry *entry = &config->entries[i];
 
         if (entry->short_key) {
             size += ft_strlen(entry->short_key);
@@ -93,11 +93,11 @@ ft_args_parser_print_docs(const t_args_parser_config *config) {
 
         set_description(desc[i], size, entry);
     }
-    biggest_desc_len = find_biggest_tab_len(desc, config->parser_entries_len);
-    for (size_t i = 0; i < config->parser_entries_len; i++) {
+    biggest_desc_len = find_biggest_tab_len(desc, config->entries_nbr);
+    for (size_t i = 0; i < config->entries_nbr; i++) {
         (void)printf("\t%-*s%s\n", (int)biggest_desc_len + DEFAULT_SPACING_DESCRIPTION, desc[i],
-                     config->parser_entries[i].description);
+                     config->entries[i].description);
     }
 
-    free_desc(desc, config->parser_entries_len);
+    free_desc(desc, config->entries_nbr);
 }

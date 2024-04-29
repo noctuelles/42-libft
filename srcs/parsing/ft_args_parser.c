@@ -13,21 +13,21 @@
 #include "ft_args_parser.h"
 
 #include <assert.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "libft.h"
 
-typedef struct s_parsed_arg {
-    const t_args_parser_option_entry *entry;
-    const char                       *argument_value;
-    bool                              opt_arg_on_next_argv;
-} t_parsed_arg;
+enum e_parse_ret_val {
+    ERROR                   = -1,
+    OK                      = 0,
+    USED_NEXT_ARGUMENT      = 1,
+    USED_REMAINING_ARGUMENT = 2,
+};
 
-static void
-free_parsed_args(void *content) {
-    free(content);
-}
+typedef enum e_parse_ret_val (*t_parse_key_fn)(const t_args_parser_option_entry *, size_t, const char *, const char *,
+                                               void *input);
 
 static size_t
 option_key_len(const char *key) {
@@ -49,12 +49,12 @@ find_parser_option_entry_by_short_key(const t_args_parser_option_entry *entries,
     while (i < nbr_entries) {
         entry = &entries[i];
         if (entry->short_key[0] == key) {
-            break;
+            return (entry);
         }
         i++;
     }
 
-    return (entry);
+    return (NULL);
 }
 
 static const t_args_parser_option_entry *
@@ -68,131 +68,130 @@ find_parser_option_entry_by_long_key(const t_args_parser_option_entry *entries, 
     while (i < nbr_entries) {
         entry = &entries[i];
         if (ft_strncmp(entry->long_key, key, key_size) == 0) {
-            break;
+            return (entry);
         }
         i++;
     }
 
-    return (entry);
-}
-
-static void
-handle_short_key(t_parsed_arg *parsed_arg, const char *argument) {}
-
-static void
-handle_long_key(t_parsed_arg *parsed_arg, const char *argument) {}
-
-static t_list *
-handle_key(t_list **parsed_args, const t_args_parser_option_entry *entry, const char *argument) {
-    assert(entry->long_key != NULL && entry->short_key == NULL);
-    assert(entry->long_key == NULL && entry->short_key != NULL);
-
-    t_list       *elem       = NULL;
-    t_parsed_arg *parsed_arg = NULL;
-
-    parsed_arg = malloc(sizeof(*parsed_arg));
-    if (parsed_arg == NULL) {
-        return (NULL);
-    }
-    elem = ft_lstnew(parsed_arg);
-    if (elem == NULL) {
-        free(parsed_arg);
-        return (NULL);
-    }
-    parsed_arg->entry = entry;
-    if (entry->long_key) {
-        handle_long_key(parsed_arg, argument);
-    } else if (entry->short_key) {
-        handle_short_key(parsed_arg, argument);
-    }
-    ft_lstadd_back(parsed_args, elem);
-    return (elem);
-}
-
-t_list *
-parse_argument(const t_args_parser_option_entry *entries, const size_t nbr_entries, const char *argument) {
-    const t_args_parser_option_entry *entry       = NULL;
-    t_list                           *parsed_args = NULL;
-    t_parsed_arg                     *parsed_arg  = NULL;
-
-    if (*argument == '-') {
-        argument++;
-        if (*argument == '-') {
-            argument++;
-            entry = find_parser_option_entry_by_long_key(entries, nbr_entries, argument);
-            if (entry == NULL) {
-                goto err;
-            }
-            parsed_arg                       = malloc(sizeof(*parsed_arg));
-            parsed_arg->opt_arg_on_next_argv = false;
-            parsed_arg->argument_value       = argument + option_key_len(argument);
-
-            ft_lstadd_back(&parsed_args, ft_lstnew(parsed_arg));
-        } else {
-            while (*argument != '\0') {
-                entry = find_parser_option_entry_by_short_key(entries, nbr_entries, *argument);
-                if (entry == NULL) {
-                    goto err;
-                }
-                parsed_arg        = malloc(sizeof(*parsed_arg));
-                parsed_arg->entry = entry;
-                if (parsed_arg->entry->argument) {
-                    if (*(argument + 1) == '\0') {
-                        parsed_arg->opt_arg_on_next_argv = true;
-                        parsed_arg->argument_value       = NULL;
-                    } else {
-                        parsed_arg->opt_arg_on_next_argv = false;
-                        parsed_arg->argument_value       = argument + 1;
-                    }
-                }
-                ft_lstadd_back(&parsed_args, ft_lstnew(parsed_arg));
-                argument++;
-            }
-        }
-    }
-
-    return (parsed_args);
-err:
-    ft_lstclear(&parsed_args, free_parsed_args);
     return (NULL);
 }
 
-int
-ft_args_parser(t_args_parser_config *parser_config) {
-    t_list       *parsed_args     = NULL;
-    t_parsed_arg *last_parsed_arg = NULL;
+static enum e_parse_ret_val
+parse_short_key(const t_args_parser_option_entry *entries, const size_t entries_nbr, const char *argument,
+                const char *next_argument, void *input) {
+    const t_args_parser_option_entry *entry          = NULL;
+    const char                       *argument_value = NULL;
+    t_args_parser_state               parser_state   = {0};
+    enum e_parse_ret_val              ret_val        = OK;
 
-    for (size_t i = 1; i < parser_config->argc; i++) {
-        if (last_parsed_arg) {
-            if (last_parsed_arg->opt_arg_on_next_argv) {
-                last_parsed_arg->argument_value = parser_config->argv[i];
-            }
+    while (*argument != '\0' && ret_val != USED_REMAINING_ARGUMENT) {
+        entry = find_parser_option_entry_by_short_key(entries, entries_nbr, *argument);
+        if (entry == NULL) {
+            ft_error(0, 0, "unkown option -- %c", *argument);
+            return (ERROR);
         }
-
-        if ((parsed_args = parse_argument(parser_config->parser_entries, parser_config->parser_entries_len,
-                                          parser_config->argv[i])) == NULL) {
-            ft_error(0, 0, "unknown option");
-            return (-1);
-        }
-
-        for (t_list *elem = parsed_args; elem != NULL; elem = elem->next) {
-            t_parsed_arg *parsed_arg = elem->content;
-
-            if (parsed_arg->entry->argument) {
-                if (parsed_arg->argument_value == '\0') {
-                    if (parsed_arg->opt_arg_on_next_argv == true) {
-                        last_parsed_arg = parsed_arg;
-                    } else {
-                        ft_error(0, 0, "argument missing for option '%s'\n",
-                                 parsed_arg->entry->short_key != NULL ? parsed_arg->entry->short_key
-                                                                      : parsed_arg->entry->long_key);
-                        ft_lstclear(&parsed_args, free_parsed_args);
-                        return (-1);
-                    }
+        if (entry->has_argument) {
+            if (*(argument + 1) != '\0') {
+                argument_value = argument + 1;
+                ret_val        = USED_REMAINING_ARGUMENT;
+            } else {
+                if (next_argument == NULL) {
+                    ft_error(0, 0, "missing argument for option -- '%s'", entry->short_key);
+                    return (ERROR);
                 }
+                argument_value = next_argument;
+                ret_val        = USED_NEXT_ARGUMENT;
             }
+        }
+        if (entry->parse_fn(argument_value, &parser_state, input) == -1) {
+            ft_error(0, 0, "option error -- '%s': '%s'", entry->short_key, parser_state.error_message);
+            return (ERROR);
+        }
+        argument++;
+    }
+    return (ret_val);
+}
+
+static enum e_parse_ret_val
+parse_long_key(const t_args_parser_option_entry *entries, const size_t entries_nbr, const char *argument,
+               const char *next_argument, void *input) {
+    const t_args_parser_option_entry *entry          = NULL;
+    const char                       *argument_value = NULL;
+    t_args_parser_state               parser_state   = {0};
+
+    (void)next_argument;
+    entry = find_parser_option_entry_by_long_key(entries, entries_nbr, argument);
+    if (entry == NULL) {
+        ft_error(0, 0, "unkown option -- %s", argument);
+        return (ERROR);
+    }
+    if (entry->has_argument) {
+        argument_value = argument + option_key_len(argument);
+        if (*argument_value == '=') {
+            argument_value++;
+        }
+        if (*argument_value == '\0') {
+            ft_error(0, 0, "missing argument for option -- '%s'", entry->long_key);
+            return (ERROR);
         }
     }
+    if (entry->parse_fn(argument_value, &parser_state, input) == -1) {
+        ft_error(0, 0, "option error -- '%s': '%s'", entry->long_key, parser_state.error_message);
+        return (ERROR);
+    }
+    return (OK);
+}
 
+static enum e_parse_ret_val
+parse_opts(const t_args_parser_option_entry *entries, const size_t nbr_entries, const char *argument,
+           const char *next_argument, void *input) {
+    t_parse_key_fn parse_key_fn = NULL;
+
+    if (argument[1] == '-') {
+        parse_key_fn = parse_long_key;
+        argument += 2;
+    } else {
+        parse_key_fn = parse_short_key;
+        argument += 1;
+    }
+    return (parse_key_fn(entries, nbr_entries, argument, next_argument, input));
+}
+
+static int
+parse_arg(const char *argument, void *input, t_args_parser_parse_fn parse_argument_fn) {
+    t_args_parser_state parser_state = {0};
+
+    if (parse_argument_fn(argument, &parser_state, input) == -1) {
+        ft_error(0, 0, "argument -- '%s' : %s", argument, parser_state.error_message);
+        return (-1);
+    }
+
+    return (0);
+}
+
+int
+ft_args_parser(const t_args_parser_config *parser_config) {
+    char               **argv          = parser_config->argv + 1;
+    const char          *argument      = NULL;
+    const char          *next_argument = NULL;
+    enum e_parse_ret_val ret_val       = OK;
+
+    while (*argv != NULL) {
+        argument      = *argv;
+        next_argument = *(argv + 1);
+        if (argument[0] == '-' && argument[1] != '\0') {
+            ret_val = parse_opts(parser_config->entries, parser_config->entries_nbr, argument,
+                                 next_argument, parser_config->input);
+            if (ret_val == ERROR) {
+                return (ret_val);
+            }
+            if (ret_val == USED_NEXT_ARGUMENT) {
+                argv++;
+            }
+        } else if (parse_arg(argument, parser_config->default_argument_parse_fn, parser_config->input) == -1) {
+            return (-1);
+        }
+        argv++;
+    }
     return (0);
 }
