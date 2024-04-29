@@ -12,11 +12,6 @@
 
 #include "ft_args_parser.h"
 
-#include <assert.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "libft.h"
 
 enum e_parse_ret_val {
