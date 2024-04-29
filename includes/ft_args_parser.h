@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:50:28 by plouvel           #+#    #+#             */
-/*   Updated: 2024/02/12 10:44:22 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:33:10 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ typedef struct s_args_parser_option_entry {
 
 typedef struct s_args_parser_config {
     char                            **argv;
-    const size_t                      argc;
+    size_t                            argc;
     const t_args_parser_option_entry *entries;
-    const size_t                      entries_nbr;
+    size_t                            entries_nbr;
     t_args_parser_parse_fn            default_argument_parse_fn;
     void                             *input;
 } t_args_parser_config;
