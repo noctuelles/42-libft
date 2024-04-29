@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/04/18 23:52:04 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:48:24 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ find_parser_option_entry_by_short_key(const t_args_parser_option_entry *entries,
 
     while (i < nbr_entries) {
         entry = &entries[i];
-        if (entry->short_key[0] == key) {
+        if (entry->short_key && entry->short_key[0] == key) {
             return (entry);
         }
         i++;
@@ -62,7 +62,7 @@ find_parser_option_entry_by_long_key(const t_args_parser_option_entry *entries, 
     key_size = option_key_len(key);
     while (i < nbr_entries) {
         entry = &entries[i];
-        if (ft_strncmp(entry->long_key, key, key_size) == 0) {
+        if (entry->long_key && ft_strncmp(entry->long_key, key, key_size) == 0) {
             return (entry);
         }
         i++;
@@ -99,7 +99,7 @@ parse_short_key(const t_args_parser_option_entry *entries, const size_t entries_
             }
         }
         if (entry->parse_fn(argument_value, &parser_state, input) == -1) {
-            ft_error(0, 0, "option error -- '%s': '%s'", entry->short_key, parser_state.error_message);
+            ft_error(0, 0, "option error -- '%s': %s.", entry->short_key, parser_state.error_message);
             return (ERROR);
         }
         argument++;
@@ -131,7 +131,7 @@ parse_long_key(const t_args_parser_option_entry *entries, const size_t entries_n
         }
     }
     if (entry->parse_fn(argument_value, &parser_state, input) == -1) {
-        ft_error(0, 0, "option error -- '%s': '%s'", entry->long_key, parser_state.error_message);
+        ft_error(0, 0, "option error -- '%s': %s.", entry->long_key, parser_state.error_message);
         return (ERROR);
     }
     return (OK);
@@ -153,11 +153,11 @@ parse_opts(const t_args_parser_option_entry *entries, const size_t nbr_entries, 
 }
 
 static int
-parse_arg(const char *argument, void *input, t_args_parser_parse_fn parse_argument_fn) {
+parse_arg(const char *argument, t_args_parser_parse_fn parse_argument_fn, void *input) {
     t_args_parser_state parser_state = {0};
 
     if (parse_argument_fn(argument, &parser_state, input) == -1) {
-        ft_error(0, 0, "argument -- '%s' : %s", argument, parser_state.error_message);
+        ft_error(0, 0, "argument -- '%s' : %s.", argument, parser_state.error_message);
         return (-1);
     }
 
