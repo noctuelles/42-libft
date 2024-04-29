@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/30 08:30:50 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/04/29 16:33:20 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void   ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 /* Un-official additional custom functions */
 
+bool ft_strmatch_uint(const char *str);
 bool ft_strmatch_int(const char *str);
 bool ft_strmatch_hex(const char *str);
 
@@ -165,8 +166,8 @@ typedef struct s_vector t_vector;
 t_vector   *vector_new(size_t capacity, size_t elem_size);
 t_vector   *vector_push_back(t_vector *vector, const void *elem);
 const void *vector_data(const t_vector *vector);
-size_t     vector_size(const t_vector *vector);
-void       vector_free(t_vector **vector);
-void       vector_sort(t_vector *vector, int (*cmp)(const void *, const void *));
+size_t      vector_size(const t_vector *vector);
+void        vector_free(t_vector **vector);
+void        vector_sort(t_vector *vector, int (*cmp)(const void *, const void *));
 
 #endif

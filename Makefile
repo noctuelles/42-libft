@@ -57,6 +57,7 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_itoa.c			\
 				string/ft_itoa_base.c		\
 				string/ft_itoa_ubase.c		\
+				string/ft_strmatch_uint.c   \
 				string/ft_strmatch_int.c    \
 				string/ft_strmatch_hex.c    \
 				io/ft_putchar_fd.c			\

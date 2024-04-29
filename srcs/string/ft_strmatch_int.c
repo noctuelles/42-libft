@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/20 14:27:27 by plouvel           #+#    #+#             */
-/*   Updated: 2024/01/27 15:12:53 by plouvel          ###   ########.fr       */
+/*   Created: 2024/04/29 16:31:58 by plouvel           #+#    #+#             */
+/*   Updated: 2024/04/29 16:32:31 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 
 bool
 ft_strmatch_int(const char *str) {
+    if (*str == '-') {
+        str++;
+    }
     while (*str != '\0') {
         if (!ft_isdigit(*str)) {
             return (false);
