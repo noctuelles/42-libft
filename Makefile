@@ -104,7 +104,7 @@ OBJS		=	$(addprefix $(OBJS_DIR), $(SRCS:.c=.o))
 
 CFLAGS		=	-Wall -Werror -Wextra -I includes -g3
 
-CC			=	cc
+CC			=	gcc
 
 NAME		=	libft.a
 
