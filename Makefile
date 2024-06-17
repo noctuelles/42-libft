@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2024/02/12 10:47:44 by plouvel          ###   ########.fr        #
+#    Updated: 2024/06/17 13:39:36 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_strmatch_uint.c   \
 				string/ft_strmatch_int.c    \
 				string/ft_strmatch_hex.c    \
+				string/ft_strprefix.c       \
 				io/ft_putchar_fd.c			\
 				io/ft_putchar.c			\
 				io/ft_putstr_fd.c		\
@@ -96,6 +97,7 @@ SRCS		=	memory/ft_memset.c 			\
 				linked_list/ft_dlstiter.c					\
 				linked_list/ft_lstmap.c						\
 				linked_list/ft_dlstsort.c					\
+				linked_list/ft_lstsort.c					\
 				parsing/ft_args_parser.c					\
 				parsing/ft_args_parser_docs.c		\
 				vector/vector.c

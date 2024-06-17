@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2024/04/29 16:33:20 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:37:09 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char  *ft_strdup(const char *s);
 char  *ft_strndup(const char *s, size_t n);
 char  *ft_strdelchrs(char *str, const char *charset);
 char  *ft_strdelchr(char *str);
+bool   ft_strprefix(const char *str, const char *prefix);
 
 char *ft_straddc(char **s, char stop, char c, size_t n);
 char *ft_straddbc(char **s, char c, size_t n);
@@ -150,6 +151,7 @@ void    ft_lstadd_front(t_list **lst, t_list *new);
 void    ft_lstdelone(t_list *lst, void (*del)(void *));
 void    ft_lstclear(t_list **lst, void (*del)(void *));
 void    ft_lstiter(t_list *lst, void (*f)(void *));
+void    ft_lstsort(t_list **head, int (*pred)(const void *, const void *));
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 t_dlist *ft_dlstnew(void *content);
