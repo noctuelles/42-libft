@@ -6,7 +6,7 @@
 #    By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/03 10:13:17 by plouvel           #+#    #+#              #
-#    Updated: 2024/06/17 13:39:36 by plouvel          ###   ########.fr        #
+#    Updated: 2024/06/20 11:51:06 by plouvel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,6 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_strndup.c			\
 				string/ft_strdelchrs.c		\
 				string/ft_strdelchr.c		\
-				string/ft_straddc.c			\
-				string/ft_straddbc.c		\
-				string/ft_straddec.c		\
-				string/ft_straddbs.c		\
-				string/ft_straddes.c	 	\
-				string/ft_strnew_nchar.c	\
-				string/ft_strnew_chars.c	\
 				string/ft_strmapi.c			\
 				string/ft_striteri.c		\
 				string/ft_split.c			\
@@ -55,6 +48,7 @@ SRCS		=	memory/ft_memset.c 			\
 				string/ft_atof.c			\
 				string/ft_atoi_base.c		\
 				string/ft_itoa.c			\
+				string/ft_baselen.c			\
 				string/ft_itoa_base.c		\
 				string/ft_itoa_ubase.c		\
 				string/ft_strmatch_uint.c   \

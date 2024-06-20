@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 14:01:02 by plouvel           #+#    #+#             */
-/*   Updated: 2024/06/17 13:37:09 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/06/20 11:50:11 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,6 @@ char  *ft_strdelchrs(char *str, const char *charset);
 char  *ft_strdelchr(char *str);
 bool   ft_strprefix(const char *str, const char *prefix);
 
-char *ft_straddc(char **s, char stop, char c, size_t n);
-char *ft_straddbc(char **s, char c, size_t n);
-char *ft_straddec(char **s, char c, size_t n);
-
-char *ft_straddbs(char **s, const char *add);
-char *ft_straddes(char **s, const char *add);
-
-char *ft_strnew_nchar(char c, size_t n);
-char *ft_strnew_chars(size_t n, ...);
-
 char *ft_itoa(int n);
 char *ft_itoa_base(int64_t n, const char *base);
 char *ft_itoa_ubase(uint64_t n, const char *base);
@@ -106,9 +96,10 @@ void   ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 /* Un-official additional custom functions */
 
-bool ft_strmatch_uint(const char *str);
-bool ft_strmatch_int(const char *str);
-bool ft_strmatch_hex(const char *str);
+bool   ft_strmatch_uint(const char *str);
+bool   ft_strmatch_int(const char *str);
+bool   ft_strmatch_hex(const char *str);
+size_t ft_baselen(const char *base);
 
 /* ###### Input / Input functions ###### */
 
