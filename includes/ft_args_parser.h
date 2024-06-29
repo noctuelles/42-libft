@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:50:28 by plouvel           #+#    #+#             */
-/*   Updated: 2024/04/29 16:33:10 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/06/29 17:16:57 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_args_parser_state {
     char *error_message;
+    bool  print_arg;
 } t_args_parser_state;
 
 typedef int (*t_args_parser_parse_fn)(const char *, t_args_parser_state *, void *);

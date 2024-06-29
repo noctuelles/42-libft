@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/04/29 16:48:24 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/06/29 17:18:46 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,12 @@ parse_short_key(const t_args_parser_option_entry *entries, const size_t entries_
             }
         }
         if (entry->parse_fn(argument_value, &parser_state, input) == -1) {
-            ft_error(0, 0, "option error -- '%s': %s.", entry->short_key, parser_state.error_message);
+            if (parser_state.print_arg) {
+                ft_error(0, 0, "option error -- '%s': %s - '%s'.", entry->short_key, parser_state.error_message,
+                         argument_value);
+            } else {
+                ft_error(0, 0, "option error -- '%s': %s.", entry->short_key, parser_state.error_message);
+            }
             return (ERROR);
         }
         argument++;
@@ -131,7 +136,12 @@ parse_long_key(const t_args_parser_option_entry *entries, const size_t entries_n
         }
     }
     if (entry->parse_fn(argument_value, &parser_state, input) == -1) {
-        ft_error(0, 0, "option error -- '%s': %s.", entry->long_key, parser_state.error_message);
+        if (parser_state.print_arg) {
+            ft_error(0, 0, "option error -- '%s': %s - '%s'.", entry->long_key, parser_state.error_message,
+                     argument_value);
+        } else {
+            ft_error(0, 0, "option error -- '%s': %s.", entry->long_key, parser_state.error_message);
+        }
         return (ERROR);
     }
     return (OK);
@@ -175,8 +185,8 @@ ft_args_parser(const t_args_parser_config *parser_config) {
         argument      = *argv;
         next_argument = *(argv + 1);
         if (argument[0] == '-' && argument[1] != '\0') {
-            ret_val = parse_opts(parser_config->entries, parser_config->entries_nbr, argument,
-                                 next_argument, parser_config->input);
+            ret_val = parse_opts(parser_config->entries, parser_config->entries_nbr, argument, next_argument,
+                                 parser_config->input);
             if (ret_val == ERROR) {
                 return (ret_val);
             }
