@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:44:37 by plouvel           #+#    #+#             */
-/*   Updated: 2024/06/29 17:18:46 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/07/08 14:56:19 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,13 @@ ft_args_parser(const t_args_parser_config *parser_config) {
     char               **argv          = parser_config->argv + 1;
     const char          *argument      = NULL;
     const char          *next_argument = NULL;
+    bool                 ignore_opts   = false;
     enum e_parse_ret_val ret_val       = OK;
 
     while (*argv != NULL) {
         argument      = *argv;
         next_argument = *(argv + 1);
-        if (argument[0] == '-' && argument[1] != '\0') {
+        if (!ignore_opts && argument[0] == '-' && argument[1] != '\0') {
             ret_val = parse_opts(parser_config->entries, parser_config->entries_nbr, argument, next_argument,
                                  parser_config->input);
             if (ret_val == ERROR) {
@@ -193,8 +194,13 @@ ft_args_parser(const t_args_parser_config *parser_config) {
             if (ret_val == USED_NEXT_ARGUMENT) {
                 argv++;
             }
-        } else if (parse_arg(argument, parser_config->default_argument_parse_fn, parser_config->input) == -1) {
-            return (-1);
+        } else {
+            if (parse_arg(argument, parser_config->default_argument_parse_fn, parser_config->input) == -1) {
+                return (-1);
+            }
+            if (parser_config->stop_opts_parsing_on_first_non_opt && !ignore_opts) {
+                ignore_opts = true;
+            }
         }
         argv++;
     }

@@ -6,7 +6,7 @@
 /*   By: plouvel <plouvel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 09:50:28 by plouvel           #+#    #+#             */
-/*   Updated: 2024/06/29 17:16:57 by plouvel          ###   ########.fr       */
+/*   Updated: 2024/07/08 14:55:59 by plouvel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #define DEFAULT_SPACING_DESCRIPTION 10
 
 typedef struct s_args_parser_state {
-    char *error_message;
-    bool  print_arg;
+    char *error_message; /* An error message is displayed if a parsing function returns a non zero value. */
+    bool  print_arg;     /* Print the associated argument */
 } t_args_parser_state;
 
 typedef int (*t_args_parser_parse_fn)(const char *, t_args_parser_state *, void *);
@@ -39,8 +39,11 @@ typedef struct s_args_parser_config {
     size_t                            argc;
     const t_args_parser_option_entry *entries;
     size_t                            entries_nbr;
-    t_args_parser_parse_fn            default_argument_parse_fn;
-    void                             *input;
+    bool stop_opts_parsing_on_first_non_opt; /* If true, the parser will stop parsing options on the first non option
+                                                argument, and all incoming arguments will be parsed by
+                                                default_argument_parse_fn */
+    t_args_parser_parse_fn default_argument_parse_fn;
+    void                  *input;
 } t_args_parser_config;
 
 int  ft_args_parser(const t_args_parser_config *parser_config);
